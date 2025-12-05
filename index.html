@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="EN-CA">
+<head>
+  <meta charset="UTF-8">
+  <title>Matcha Museum</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.google.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========
+       BASE & DESIGN SYSTEM
+       ========= */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --matcha-green: #7faa4f;
+      --deep-green: #465b37;
+      --cream-beige: #f5f0e3;
+      --soft-brown: #b5764e;
+      --charcoal-ink: #222222;
+      --white: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: #a4c47c; 
+      color: var(--charcoal-ink);
+      line-height: 1.6; 
+    }
+
+    .container {
+      width: 1200px;        
+      margin: 0 auto;       
+      padding: 0 32px;      
+    }
+
+    /* =========
+       TYPOGRAPHY
+       ========= */
+
+    h1, h2, h3, h4 {
+      font-family: "Playfair Display", serif;
+      color: var(--deep-green);
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      line-height: 1.1;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.8rem;
+      color: rgba(70, 91, 55, 0.7);
+      margin-bottom: 0.4rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #364033;
+      max-width: 60rem; 
+    }
+
+    small {
+      font-size: 0.85rem;
+      color: #6b6b6b;
+    }
+
+    /* =========
+       LINKS & BUTTONS
+       ========= */
+
+    a {
+      color: var(--deep-green);
+      text-decoration: none;
+      transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    a:link    { color: var(--deep-green); }          /* link state */
+    a:visited { color: var(--soft-brown); }          /* visited state */
+    a:hover   { color: var(--charcoal-ink); }        /* hover state */
+    a:active  { color: var(--matcha-green); }        /* active state */
+
+    .btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 1px solid var(--deep-green);
+      background-color: var(--deep-green);
+      color: var(--cream-beige);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.85rem;
+      margin-top: 12px;
+    }
+
+    .btn:hover {
+      background-color: var(--cream-beige);
+      color: var(--deep-green);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--deep-green);
+      border-color: rgba(70, 91, 55, 0.45);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--deep-green);
+      color: var(--cream-beige);
+    }
+
+    /* =========
+       HEADER & NAV
+       ========= */
+
+    header {
+      background-color: rgba(245, 240, 227, 0.96);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      position: sticky;  
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 32px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--deep-green);
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #d8f4a7, var(--matcha-green));
+      border: 2px solid var(--deep-green);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .logo-text {
+      font-family: "Playfair Display", serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;    /* reset from nav lecture */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 22px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    nav li {
+      display: inline-block;
+    }
+
+    nav a {
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover {
+      border-bottom-color: var(--matcha-green);
+    }
+
+    /* =========
+       GENERIC SECTION FRAME
+       ========= */
+
+    main {
+      background-color: transparent;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .card {
+      background-color: var(--cream-beige);
+      border-radius: 22px;
+      border: 1px solid rgba(0,0,0,0.06); 
+      box-shadow: 0 18px 40px rgba(0,0,0,0.12); 
+      padding: 40px 40px 46px;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    /* =========
+       HOME
+       ========= */
+
+    #home {
+      padding-top: 60px;
+    }
+
+    .hero-grid {
+      display: grid;                 
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: #3e4b39;
+    }
+
+    .hero-meta {
+      margin-top: 18px;
+      font-size: 0.95rem;
+      color: #5a5f51;
+    }
+
+    .hero-image {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.08);
+      background-color: #dbe8c3;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    /* =========
+       HISTORY
+       ========= */
+
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 34px;
+      align-items: flex-start;
+    }
+
+    .timeline {
+      border-left: 1px solid rgba(0,0,0,0.14);
+      padding-left: 20px;
+      margin-top: 16px;
+    }
+
+    .timeline-item {
+      margin-bottom: 16px;
+    }
+
+    .timeline-year {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(70, 91, 55, 0.7);
+    }
+
+    .caption {
+      font-size: 0.85rem;
+      color: #6a6a6a;
+      margin-top: 6px;
+    }
+
+    .image-frame {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.08);
+      background-color: #e0f0c9;
+    }
+
+    .image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* =========
+       TYPES
+       ========= */
+
+    .types-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 18px;
+    }
+
+    .type-card {
+      background-color: var(--cream-beige);
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: 18px 18px 20px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+    }
+
+    .type-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      margin-bottom: 10px;
+    }
+
+    .type-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(70, 91, 55, 0.7);
+    }
+
+    /* =========
+       BREWING 
+       ========= */
+
+    .brewing-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .ratio-table-wrapper {
+      margin-top: 16px;
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 520px;
+      font-size: 0.9rem;
+      background-color: var(--cream-beige);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    th, td {
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e0ebc8;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(even) td {
+      background-color: #f2ecde;
+    }
+
+    .brew-note {
+      font-size: 0.82rem;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    /* =========
+       RECIPES
+       ========= */
+
+    .recipes-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .recipe-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .recipe-item {
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .recipe-name {
+      font-weight: 600;
+    }
+
+    .tag-row {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background-color: #e3edd2;
+      color: #3f4c31;
+    }
+
+    /* =========
+       CAFE
+       ========= */
+
+    .cafe-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    .info-card {
+      background-color: #f9f3e8;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,0.05);
+      padding: 18px 20px;
+      margin-bottom: 14px;
+    }
+
+    .info-card h3 {
+      margin-top: 0;
+      margin-bottom: 6px;
+    }
+
+    dl {
+      margin: 0;
+    }
+
+    dt {
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    dd {
+      margin: 0 0 4px 0;
+    }
+
+    /* =========
+       FOOTER
+       ========= */
+
+    footer {
+      background-color: rgba(245,240,227,0.98);
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 20px 0 26px;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAVIGATION -->
+  <header>
+    <div class="container site-header">
+      <a href="#home" class="logo">
+        <div class="logo-mark" hidden="true"></div>
+        <span class="logo-text">Matcha Museum</span>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="#history">History</a></li>
+          <li><a href="#types">Types</a></li>
+          <li><a href="#brewing">Brewing</a></li>
+          <li><a href="#recipes">Recipes</a></li>
+          <li><a href="#cafe">Cafe</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HOME -->
+    <section id="home">
+      <div class="container">
+        <div class="card hero-grid">
+          <div>
+            <div class="eyebrow">Personal Website · GBDA 228</div>
+            <h1>Matcha Museum</h1>
+            <p class="hero-tagline">
+              A single-page, high-end café style website exploring the history, flavour
+              and design of matcha.
+            </p>
+            <p class="hero-meta">
+              This fictional museum is built as a class project: the layout follows a simple
+              sitemap—Home, History, Types, Brewing, Recipes, and Café—so visitors can
+              wander through each part of the matcha experience.
+            </p>
+            <div class="hero-actions">
+              <a href="#history" class="btn">Begin the tour</a>
+              <a href="#cafe" class="btn btn-secondary">Jump to café</a>
+            </div>
+          </div>
+
+          <div class="hero-image">
+            <!-- IMAGE 1 -->
+            <img
+              src="images/matcha-hero-bowl.png"
+              alt="Overhead view of a matcha bowl, bamboo whisk, and scoop on a pale green background"
+              width="600"
+              height="750"
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="history">
+      <div class="container">
+        <div class="card history-grid">
+          <div>
+            <div class="section-header">
+              <div class="eyebrow">History</div>
+              <h2>From monastery ritual to café regular.</h2>
+              <p>
+                The History section traces how powdered green tea travelled from Song dynasty
+                China to Japanese tea ceremony, then into the global cafés we recognize now.
+              </p>
+            </div>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-year">1100s · China</div>
+                <p>
+                  Whisked powdered tea appears in Song dynasty court culture, celebrated for
+                  its vivid foam and meditative preparation.
+                </p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">1500s · Japan</div>
+                <p>
+                  Zen monks refine powdered tea into <em>chanoyu</em>, a ceremony that turns
+                  each bowl into a quiet performance of care and attention.
+                </p>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2000s · Global</div>
+                <p>
+                  Matcha leaves the tearoom and enters bakeries, branding studios and
+                  social feeds—keeping its deep green colour but gaining new personalities.
+                </p>
+              </div>
+            </div>
+
+            <p class="caption">
+              Want the full story? You can
+              <a href="https://en.wikipedia.org/wiki/Matcha" target="_blank" rel="noopener">
+                read more about matcha on Wikipedia
+              </a>
+              as a starting point.
+            </p>
+          </div>
+
+          <div class="image-frame">
+            <!-- IMAGE 2 -->
+            <img
+              src="images/matcha-scroll-history.jpg"
+              alt="Vintage-style illustration and photos of early matcha tools displayed together"
+              width="480"
+              height="620"
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPES -->
+    <section id="types">
+      <div class="container">
+        <div class="card">
+          <div class="section-header">
+            <div class="eyebrow">Types</div>
+            <h2>Grades of green.</h2>
+            <p>
+              Not all matcha is the same. In this section, visitors compare ceremonial, latte,
+              and culinary grades—each with its own ideal use and design personality.
+            </p>
+          </div>
+
+          <div class="types-grid">
+            <article class="type-card">
+              <!-- IMAGE 3 -->
+              <img
+                src="images/matcha-ceremonial.jpg"
+                alt="Close-up of vibrant ceremonial grade matcha powder in a small dish"
+                width="360"
+                height="220"
+              >
+              <div class="type-label">Ceremonial</div>
+              <h3>Usucha (thin tea)</h3>
+              <p>
+                Bright colour, fine texture, and a gentle balance of umami and sweetness.
+                Best enjoyed whisked with water only.
+              </p>
+            </article>
+
+            <article class="type-card">
+              <!-- IMAGE 4 -->
+              <img
+                src="images/matcha-latte-grade.jpg"
+                alt="Iced matcha latte in a glass with layered milk and green tea"
+                width="360"
+                height="220"
+              >
+              <div class="type-label">Latte</div>
+              <h3>Everyday café matcha</h3>
+              <p>
+                Slightly more robust to cut through milk and ice. Designed for lattes,
+                frappes, and playful flavour pairings.
+              </p>
+            </article>
+
+            <article class="type-card">
+              <!-- IMAGE 5 -->
+              <img
+                src="images/matcha-baking.jpg"
+                alt="Matcha cookies and cakes arranged on a cream plate"
+                width="360"
+                height="220"
+              >
+              <div class="type-label">Culinary</div>
+              <h3>For baking & desserts</h3>
+              <p>
+                Strong, earthy flavour and darker green colour that stays visible in doughs,
+                batters, and fillings.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BREWING (with TABLE) -->
+    <section id="brewing">
+      <div class="container">
+        <div class="card brewing-grid">
+          <div>
+            <div class="section-header">
+              <div class="eyebrow">Brewing</div>
+              <h2>Whisk, pour, repeat.</h2>
+              <p>
+                Brewing matcha is half science, half choreography. In this “lab” visitors
+                learn how water temperature, ratio, and whisking style shape the final bowl.
+              </p>
+            </div>
+
+            <ol>
+              <li>Sift 1–2 grams of matcha into a warm bowl.</li>
+              <li>Add a small splash of cool water to make a smooth paste.</li>
+              <li>Pour in the rest of your hot water (not boiling).</li>
+              <li>Whisk in a quick “W” motion until a fine foam appears.</li>
+            </ol>
+            <p>
+              The table on the right acts like a mini brewing cheat-sheet for visitors
+              experimenting with different styles.
+            </p>
+          </div>
+
+          <div>
+            <div class="ratio-table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Style</th>
+                    <th>Matcha</th>
+                    <th>Water / Milk</th>
+                    <th>Temp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Usucha (thin)</td>
+                    <td>2 g</td>
+                    <td>60–70 ml water</td>
+                    <td>75–80°C</td>
+                  </tr>
+                  <tr>
+                    <td>Koicha (thick)</td>
+                    <td>4 g</td>
+                    <td>40 ml water</td>
+                    <td>70–75°C</td>
+                  </tr>
+                  <tr>
+                    <td>Hot latte</td>
+                    <td>2 g</td>
+                    <td>180 ml milk</td>
+                    <td>60–65°C</td>
+                  </tr>
+                  <tr>
+                    <td>Iced latte</td>
+                    <td>2 g</td>
+                    <td>80 ml water + ice + milk</td>
+                    <td>Room temp</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="brew-note">
+              *These ratios are a starting point—visitors are encouraged to tweak them
+              based on taste.
+            </p>
+
+            <!-- IMAGE 6 -->
+            <div class="image-frame" style="margin-top: 16px;">
+              <img
+                src="images/matcha-whisk-motion.jpg"
+                alt="Hand whisking matcha in a ceramic bowl in a fast W-shaped motion"
+                width="420"
+                height="260"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECIPES -->
+    <section id="recipes">
+      <div class="container">
+        <div class="card recipes-grid">
+          <div>
+            <div class="section-header">
+              <div class="eyebrow">Recipes</div>
+              <h2>Five ways to taste the museum at home.</h2>
+              <p>
+                The recipe list turns the exhibit into a mini cookbook. Each card pairs a
+                simple description with tags for flavour and difficulty.
+              </p>
+            </div>
+
+            <ul class="recipe-list">
+              <li class="recipe-item">
+                <div class="recipe-name">Classic Iced Matcha Latte</div>
+                <small>Shaken with milk, ice, and a touch of syrup.</small>
+                <div class="tag-row">
+                  <span class="tag">Beginner</span>
+                  <span class="tag">Refreshing</span>
+                </div>
+              </li>
+              <li class="recipe-item">
+                <div class="recipe-name">Matcha Madeleines</div>
+                <small>Buttery shells with a soft green crumb, perfect with tea.</small>
+                <div class="tag-row">
+                  <span class="tag">Intermediate</span>
+                  <span class="tag">Baking</span>
+                </div>
+              </li>
+              <li class="recipe-item">
+                <div class="recipe-name">Ceremonial-Style Bowl</div>
+                <small>Just matcha and water, whisked until cloud-light foam appears.</small>
+                <div class="tag-row">
+                  <span class="tag">Minimal</span>
+                  <span class="tag">Traditional</span>
+                </div>
+              </li>
+              <li class="recipe-item">
+                <div class="recipe-name">Matcha Affogato</div>
+                <small>Hot matcha poured over a scoop of vanilla or matcha ice cream.</small>
+                <div class="tag-row">
+                  <span class="tag">Dessert</span>
+                  <span class="tag">Contrast</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="image-frame">
+            <!-- IMAGE 7 -->
+            <img
+              src="images/matcha-recipe-flatlay.jpg"
+              alt="Flatlay of matcha drinks and baked goods on a cream table"
+              width="480"
+              height="620"
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAFE -->
+    <section id="cafe">
+      <div class="container">
+        <div class="card cafe-layout">
+          <div>
+            <div class="section-header">
+              <div class="eyebrow">Cafe</div>
+              <h2>A quiet corner inside the museum.</h2>
+              <p>
+                The fictional Matcha Museum Café feels like a high-end magazine page:
+                soft beige walls, deep green accents, and just enough ambient noise from
+                grinders and milk steamers.
+              </p>
+            </div>
+
+            <div class="info-card">
+              <h3>Hours & Location</h3>
+              <dl>
+                <dt>Hours</dt>
+                <dd>Daily, 9:30 AM – 6:30 PM</dd>
+                <dd>Slow mornings, cosy evenings.</dd>
+                <dt>Location</dt>
+                <dd>Ground floor, just past the History gallery.</dd>
+              </dl>
+            </div>
+
+            <div class="info-card">
+              <h3>Contact</h3>
+              <p>
+                For questions about the project or collaboration ideas, reach out by email.
+              </p>
+              <p>
+                Email:
+                <a href="youremail@uwaterloo.ca">c238lee@uwaterloo.ca</a>
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div class="info-card">
+              <h3>Sample Café Menu</h3>
+              <dl>
+                <dt>House Matcha Latte</dt>
+                <dd>Ceremonial blend, oat or dairy milk.</dd>
+                <dt>Roasted Matcha Latte</dt>
+                <dd>Nutty, toasted profile with a hint of brown sugar.</dd>
+                <dt>Seasonal Special</dt>
+                <dd>Rotating drink inspired by current exhibits.</dd>
+              </dl>
+            </div>
+
+            <!-- IMAGE 8 -->
+            <div class="image-frame">
+              <img
+                src="images/matcha-cafe-interior.jpg"
+                alt="Minimal matcha café interior with wooden counter and green accents"
+                width="420"
+                height="300"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2025 Matcha Museum · GBDA 228 personal website project.</span>
+      <span>Designed &amp; Coded by [Chara Lee].</span>
+    </div>
+  </footer>
+
+</body>
+</html>
